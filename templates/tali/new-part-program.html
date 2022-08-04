@@ -1,0 +1,10 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block contents %}
+<h4> Create a new part time program </h4>
+<form action="{% url 'newpartprogram' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" class="btn btn-primary" value="Create">
+</form>
+{% endblock contents %}

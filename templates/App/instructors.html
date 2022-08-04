@@ -1,0 +1,216 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<!-- DataTables -->
+<link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+      type="text/css"/>
+
+<!-- Responsive datatable examples -->
+<link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet"
+      type="text/css"/>
+{% endblock %}
+{% block contents %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Instructors List</h4>
+                <p class="card-title-desc">The list of all the current instructors of Developers Institute.
+                </p>
+
+                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Contract</th>
+                        <th>Devise</th>
+                        <th>Rate Course</th>
+                        <th>Rate Ta</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+
+                    {% for i in instructors %}
+
+                    <tr>
+                        <td><a href="{% url 'insdetails' i.id %}"> {{ i.first_name }} {{i.last_name}}</a> <u><a
+                                href="{% url 'insedit' i.id %}">Edit</a></u> <u><a href="{% url 'insdelete' i.id %}">Delete</a></u>
+                        </td>
+                        <td>{{ i.country }}</td>
+                        <td>{{i.contract}}</td>
+                        <td>{{i.devise}}</td>
+                        <td>{{i.rate_course}}</td>
+                        <td>{{i.rate_ta}}</td>
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Register a new instructor</h4>
+
+
+                <form class="custom-validation" action="#" method="POST" method="POST">
+                    {% csrf_token %}
+                    <table class="table  dt-responsive  nowrap w-100">
+                        {{form.as_table}}
+                    </table>
+                     <div class="d-flex flex-wrap gap-2">
+                         <input class="btn btn-primary waves-effect waves-light" type="submit" value="Add Instructor">
+                     </div>
+
+                </form>
+
+
+                <!--form class="custom-validation" action="#" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3 row">
+                        <label for="first_name" class="col-md-2 col-form-label">First Name</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" placeholder="First name"
+                                   id="first_name" name="first_name">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="last_name" class="col-md-2 col-form-label">Last Name</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" placeholder="Last Name"
+                                   id="last_name" name="last_name">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="country" class="col-md-2 col-form-label">Country</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" placeholder="Country"
+                                   id="country" name="country">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label class="col-md-2 col-form-label">Contract</label>
+                        <div class="col-md-10">
+                            <select class="form-select">
+                                <option>Employee</option>
+                                <option>Freelancer</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label class="col-md-2 col-form-label">Devise</label>
+                        <div class="col-md-10">
+                            <select class="form-select">
+                                <option>ILS</option>
+                                <option>EUR</option>
+                                <option>MUR</option>
+                                <option>CFA</option>
+                                <option>USD</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="rate-course" class="col-md-2 col-form-label">Rate Course</label>
+                        <div class="col-md-10">
+                            <input class="form-control" data-parsley-type="number" type="text" placeholder="Rate Course"
+                                   id="rate-course" name="rate_course">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="rate-ta" class="col-md-2 col-form-label">Rate Ta</label>
+                        <div class="col-md-10">
+                            <input class="form-control" data-parsley-type="number" type="text" placeholder="Ta"
+                                   id="rate-ta" name="rate_ta">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="rate-checker" class="col-md-2 col-form-label">Rate Checker</label>
+                        <div class="col-md-10">
+                            <input class="form-control" data-parsley-type="number" type="text" placeholder="Checker"
+                                   id="rate-checker" name="rate_checker">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="rate-support" class="col-md-2 col-form-label">Rate Support</label>
+                        <div class="col-md-10">
+                            <input class="form-control" data-parsley-type="number" type="text" placeholder="Support"
+                                   id="rate-support" name="rate_support">
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                            Register
+                        </button>
+
+                    </div>
+                </form-->
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+{% endblock %}
+
+
+{% block extra_javascript %}
+<!-- Required datatable js -->
+<script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<!-- Buttons examples -->
+<script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'libs/jszip/dist/jszip.min.js' %}"></script>
+<script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+<script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+<!-- Responsive examples -->
+<script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+<!-- Datatable init js -->
+<script src="{% static 'js/pages/datatables.init.js' %}"></script>
+
+<!-- formulaires -->
+<script src="{% static 'libs/parsleyjs/dist/parsley.min.js' %}"></script>
+
+<script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+{% endblock %}
+
+
+
+
+
+        

@@ -1,0 +1,43 @@
+{% extends 'dashboard/dashboard.html' %}
+{% include 'partials/hori-header.html' %}
+{% block contents %}
+
+
+<h1>Instructor details</h1>
+
+<p> {{instructor.first_name}} {{instructor.last_name}} </p>
+<p> {{instructor.country}} </p>
+<p> {{instructor.contract}} </p>
+<p> {{instructor.devise}} </p>
+<p> {{instructor.rate.course}} </p>
+<p> {{instructor.rate.ta}} </p>
+<p> {{instructor.rate.checker}} </p>
+<p> {{instructor.rate.support}} </p>
+
+
+<form class="app-search d-none d-lg-block">
+    <div >
+        <input type="text" class="form-control" placeholder="Search..." name="search">
+        <span class="bx bx-search-alt"></span>
+    </div>
+</form>
+{% if results %}
+<div class="container" style="text-align: center; color:red;">
+    <h3>Result(s)</h3>
+</div>
+<br>
+{% for result in results %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+             <a href="{% url 'details' result.id %}"><p> {{ Forloop.count }}.{{ result.first_name}} </p></a>
+        </div>
+      </div>
+</div>
+{% endfor %}
+{% else %}
+    <div class="container" >
+        <h3>No results!</h3>
+    </div>
+{% endif %}
+{% endblock %}

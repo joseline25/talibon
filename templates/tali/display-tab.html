@@ -1,0 +1,224 @@
+{% extends 'dashboard/dashboard.html' %}
+
+
+{% block contents %}
+
+
+<table>
+    <tr>
+        <th>Days</th>
+        {% for i in program.structure.course.weeks %}
+        <th>{{ i.0 }}</th>
+        {% endfor %}
+    </tr>
+    {% for j in program.structure.course.days %}
+    <tr>
+        <td>{{ j.0 }}</td>
+
+        {% for k in program.structure.course.weeks %}
+
+
+        {% if k.0 == "Week1" %}
+        <td>{{ week_one.0 }}</td>
+        {% endif %}
+
+        {% if k.0 == "Week2" %}
+        <td>{{ week_two.0 }}</td>
+        {% endif %}
+        {% if k.0 == "Week3" %}
+        <td>{{ week_three.0 }}</td>
+        {% endif %}
+
+        {% endfor %}
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+
+<h3>Choose an instructor for each moment of each day</h3>
+
+
+<div class="container">
+    <form action="" method="POST" class="custom-form contact-form bg-white shadow-lg" role="form">
+     {% csrf_token %}
+    <table class="container">
+        <tr>
+            <th>Days/Moments</th>
+            {% for i in program.structure.course.weeks %}
+            <th>{{ i.0 }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td></td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td>Course</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        {% for j in program.structure.course.days %}
+        <tr>
+            <td>{{ j.0 }} - {{program.structure.course.moments.0.0}}</td>
+            {% for i in program.structure.course.weeks %}
+
+            <td>
+
+                    <select name="instructor" id="id_instructor" >
+                        <option value=" " selected>
+
+                        </option>
+                        {% for instructor in instructors %}
+
+                        <option value="{{instructor}}">
+                            {{ instructor }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>TA</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        {% for j in program.structure.course.days %}
+        <tr>
+            <td>{{ j.0 }} - {{program.structure.course.moments.1.0}}</td>
+            {% for i in program.structure.course.weeks %}
+            <td>
+
+                    <select name="instructor" id="id_instructor1">
+                        <option value=" " selected>
+
+                        </option>
+                        {% for instructor in instructors %}
+
+                        <option value="{{instructor}}">
+                            {{ instructor }}
+                        </option>
+
+                        {% endfor %}
+                    </select>
+
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Checker</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td>Support</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+
+    </table>
+
+        <div class="col-12">
+
+
+                            <button type="submit" class="form-control">Register</button>
+                        </div>
+
+      </form>
+
+</div>
+
+
+<h3>Cost per day</h3>
+
+
+<div class="container">
+
+    <table class="container">
+        <tr>
+            <th>Days/Moments</th>
+            {% for i in program.structure.course.weeks %}
+            <th>{{ i.0 }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td></td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td>Course</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        {% for j in program.structure.course.days %}
+        <tr>
+            <td>{{ j.0 }} - {{program.structure.course.moments.0.0}}</td>
+            {% for i in program.structure.course.weeks %}
+
+            <td>
+
+
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>TA</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        {% for j in program.structure.course.days %}
+        <tr>
+            <td>{{ j.0 }} - {{program.structure.course.moments.1.0}}</td>
+            {% for i in program.structure.course.weeks %}
+            <td>
+
+
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Checker</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td>Support</td>
+            {% for i in program.structure.course.weeks %}
+            <td></td>
+            {% endfor %}
+
+        </tr>
+
+    </table>
+
+</div>
+
+{% endblock contents %}

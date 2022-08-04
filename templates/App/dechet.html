@@ -1,0 +1,25 @@
+
+<table>
+    <tr>
+        <th> Days of </th>
+        {% for w in weeks %}
+        <th> {{ w }} </th>
+        {% endfor %}
+    </tr>
+    {% for d in days %}
+    <tr>
+        <td> {{ d }} </td>
+        {% for w in weeks %}
+        <td> </td>
+        {% endfor %}
+    </tr>
+    {% endfor %} {% for d in days %} {% for key , value in salaires.items %} {#{% if key|slice:":-4" == %}#}
+    <tr>
+        <td> {{ d }} </td>
+        {% for w in weeks %}
+        <td> </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table>

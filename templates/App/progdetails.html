@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>details program</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <h1>Program {{ program.name }} details</h1>
+
+    <p> {{program.name}} </p>
+    <p> {{program.country}} </p>
+    <p> {{program.start_date}} </p>
+    <p> {{program.end_date}} </p>
+
+    <p>From week number  {{ tab.0 }} to week number {{tab.1}}  of year {{tab.2}}   </p>
+    <p>From   {{ sd_day}}, {{program.start_date}} to  {{ed_day}}, {{program.end_date}} </p>
+
+    <h2>Program {{ program.name }} courses table</h2>
+
+    <table>
+        <tr>
+            <th> Days of </th>
+            {% for w in weeks %}
+            <th> {{ w }} </th>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            <td>Week nb</td>
+
+            {% for val in tab_month %}
+
+            <td>Week {{ val }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+        <tr>
+            <td>{{ days.0 }}</td>
+
+            {% for val in row1 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+        <tr>
+            <td>{{ days.1 }}</td>
+
+            {% for val in row2 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+        <tr>
+            <td>{{ days.2 }}</td>
+
+            {% for val in row3 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+        <tr>
+            <td>{{ days.3 }}</td>
+
+            {% for val in row4 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+        <tr>
+            <td>{{ days.4 }}</td>
+
+            {% for val in row5 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+        <tr>
+            <td>{{ days.5 }}</td>
+
+            {% for val in row6 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+
+        <tr>
+            <td>{{ days.6 }}</td>
+
+            {% for val in row7 %}
+
+            <td>{{ val.name_course }}</td>
+
+            {% endfor %}
+
+        </tr>
+
+    </table>
+
+
+    <h2>Choose Instructor for the program</h2>
+
+
+    <form action="" method="POST" role="form">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th> Days of </th>
+                {% for w in weeks %}
+                <th> {{ w }} </th>
+                {% endfor %}
+            </tr>
+            {% for d in days %}
+            <tr>
+                <td> {{ d }} </td>
+                {% for w in weeks %}
+                <td>
+
+                    <select name="{{ w }}{{ d }}" id="{{ w }}{{ d }}">
+                                <option value=" " selected></option>
+
+                                {% for instructor in instructors %}
+                                <option value="{{instructor}}">{{ instructor }}</option>
+                                {% endfor %}
+                            </select>
+
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <button type="submit" class="form-control">Register</button>
+    </form>
+
+
+    <h2>The corresponding salaries </h2>
+
+    <br>
+
+    <h2>All the instructors of this program </h2>
+
+        {% for val in program_instructors %}
+        <p> <a href="{% url 'proginsdetails' val.program.pk  val.instructor.id %}"> {{val.instructor.first_name}}  {{val.instructor.last_name}} </a></p>
+        <p><a href="{% url 'insdetails' val.instructor.id %}"> Details on {{val.instructor.first_name}}</a> </p>
+        {% endfor %}
+
+
+    <script src="" async defer></script>
+</body>
+
+</html>
